@@ -11,13 +11,13 @@ export class GetFilmsAction implements Action {
 export class GetFilmsSuccessAction implements Action {
   readonly type = GET_FILMS_SUCCESS;
 
-  constructor(public payload: any[]) {}
+  constructor(public payload: {films: any[]}) {}
 }
 
 export class GetFilmsErrorAction implements Action {
   readonly type = GET_FILMS_ERROR;
 
-  constructor(public payload: any) {}
+  constructor(public payload: {error: any}) {}
 }
 
 export type SwapiActions = GetFilmsAction 

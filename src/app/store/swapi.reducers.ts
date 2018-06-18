@@ -14,7 +14,7 @@ export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActio
     case fromSwapi.GET_FILMS_SUCCESS: {
       return {
         ...state,
-        film_list: action.payload,
+        film_list: action.payload.films,
         loading: false,
         error: null
       };
@@ -25,7 +25,7 @@ export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActio
         ...state,
         film_list: [],
         loading: false,
-        error: action.payload
+        error: action.payload.error
       };
     };
 

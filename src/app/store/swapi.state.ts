@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store';
 
-export interface State {
+export interface SwapiState {
   film_list: any[];
   loading: boolean;
   error: any;
 }
 
-export const initialState: State = {
+export const initialState: SwapiState = {
   film_list: [],
   loading: false,
   error: null
