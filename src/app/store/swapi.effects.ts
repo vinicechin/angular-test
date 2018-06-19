@@ -28,7 +28,6 @@ export class SwapiEffects {
     })
     .catch((error) => {
       return Observable.of(
-        // new Act.GetTodoFailed({ error: error })
         new swapiActions.GetFilmsErrorAction({error: error})
       );
     })
@@ -37,10 +36,50 @@ export class SwapiEffects {
   getChars$ = this.action$
     .ofType(swapiActions.GET_CHARS)
     .switchMap(() => {
-      return this.http.get('https://swapi.co/api/people')
+      // return this.http.get('https://swapi.co/api/people')
+      return this.getDataRecursively();
+    })
+    .map((data: any) => {
+      console.log(data)
+      return new swapiActions.GetCharsSuccessAction({chars: data})
+    })
+    .catch((error) => {
+      return Observable.of(
+        new swapiActions.GetCharsErrorAction({error: error})
+      );
     })
 
-  getDataRecursively() {
-    // return promise ...
+  getDataRecursively(url = 'https://swapi.co/api/people', array = []) {
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .toPromise()
+        .then(
+          (data: any) => {
+            array = array.concat(data.results);
+            console.log(array);
+
+            if(data.next) {
+              this.getDataRecursively(data.next, array).then(resolve).catch(reject)
+            } else {
+              resolve(array);
+            }
+          },
+          error => {
+            reject(error);
+          }
+        )
+    });
+
+      // .toPromise()
+      // .map((data: any) => {
+      //   console.log(data)
+      //   Object.assign(array, data.results);
+      //   console.log(array)
+      //   if (!data.next) {
+      //     resolve(array)
+      //   } else {
+      //     this.getDataRecursively(data.next, array).then(resolve).catch(reject);
+      //   }
+      // }))
   }
 }

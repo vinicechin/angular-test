@@ -28,5 +28,6 @@ export class AppComponent implements OnInit {
     });
 
     this.store.dispatch(new SwapiActions.GetFilmsAction())
+    this.store.dispatch(new SwapiActions.GetCharsAction())
   }
 }
