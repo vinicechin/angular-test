@@ -32,4 +32,15 @@ export class SwapiEffects {
         new swapiActions.GetFilmsErrorAction({error: error})
       );
     })
+
+  @Effect()
+  getChars$ = this.action$
+    .ofType(swapiActions.GET_CHARS)
+    .switchMap(() => {
+      return this.http.get('https://swapi.co/api/people')
+    })
+
+  getDataRecursively() {
+    // return promise ...
+  }
 }

@@ -28,6 +28,5 @@ export class AppComponent implements OnInit {
     });
 
     this.store.dispatch(new SwapiActions.GetFilmsAction())
-    // this.dataService.getFilm("https://swapi.co/api/films/1")
   }
 }

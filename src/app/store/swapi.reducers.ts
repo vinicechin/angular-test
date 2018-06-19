@@ -29,6 +29,31 @@ export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActio
       };
     };
 
+    case fromSwapi.GET_CHARS: {
+      const chars = state.chars;
+      chars.loading = true;
+      return {
+        ...state,
+        chars: chars
+      };
+    };
+
+    case fromSwapi.GET_CHARS_SUCCESS: {
+      return {
+        ...state,
+        chars: {items: action.payload.chars, loading: false},
+        error: null
+      };
+    };
+
+    case fromSwapi.GET_CHARS_ERROR: {
+      return {
+        ...state,
+        chars: {items: [], loading: false},
+        error: action.payload.error
+      };
+    };
+
     default:
       return state;
   }
