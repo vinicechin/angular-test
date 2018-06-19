@@ -1,6 +1,6 @@
 <p>
   film-item id={{ id }} title={{ currentFilm ? currentFilm.title : '' }} works!
 </p>
-<div *ngFor="let name of charNamesList">
-  {{ name }}
+<div *ngFor="let character of filmCharacters">
+  {{ character.name }}
 </div>

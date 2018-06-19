@@ -23,14 +23,14 @@ export class DataService {
     }
   }
 
-  //Receive a characters array and returns an array with their names
-  getCharsName(charsArray: any[], array: any[]) {
+  //Receive a characters url array and returns a characters array
+  getCharactersFromUrls(charsArray: any[], array: any[]) {
     if (this.chars.length > 0) {
       for(let id of this.getIdsArray(charsArray)) {
         const character = this.chars.find((char) => {
           return char.id === id
         });
-        array.push(character.name);
+        array.push(character);
       }
     }
   }

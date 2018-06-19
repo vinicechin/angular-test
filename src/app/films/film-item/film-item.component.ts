@@ -15,7 +15,7 @@ export class FilmItemComponent implements OnInit {
   swapi$: Observable<SwapiState>;
   id: number;
   currentFilm: any;
-  charNamesList: any[];
+  filmCharacters: any[];
 
   constructor(private route: ActivatedRoute,
               private store: Store<SwapiState>,
@@ -25,7 +25,7 @@ export class FilmItemComponent implements OnInit {
     this.swapi$ = this.store.select('swapi');
 
     this.swapi$.subscribe((data) => {
-      if (!this.currentFilm || this.charNamesList.length <= 0) {
+      if (!this.currentFilm || this.filmCharacters.length <= 0) {
         this.setCurrentFilm();
       }
     });
@@ -43,8 +43,8 @@ export class FilmItemComponent implements OnInit {
     this.currentFilm = this.dataService.getFilms()[this.id - 1];
     if (this.currentFilm) {
       console.log(this.currentFilm)
-      this.charNamesList = [];
-      this.dataService.getCharsName(this.currentFilm.characters, this.charNamesList)
+      this.filmCharacters = [];
+      this.dataService.getCharactersFromUrls(this.currentFilm.characters, this.filmCharacters)
     }
   }
 
