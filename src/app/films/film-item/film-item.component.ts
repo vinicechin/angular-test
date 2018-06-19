@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { SwapiState } from '../../store/swapi.state';
 
 @Component({
   selector: 'app-film-item',
@@ -7,18 +11,37 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
-  film: any;
+  swapi$: Observable<any>;
+  films: any[];
   id: number;
+  currentFilm: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private store: Store<SwapiState>) { }
 
   ngOnInit() {
+    this.swapi$ = this.store.select('swapi');
+
+    this.swapi$.subscribe((data) => {
+      this.films = data.films.items;
+      if (!this.currentFilm) {
+        this.setCurrentFilm();
+      }
+    });
+
     this.route.params
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
+          if (this.films) {
+            this.setCurrentFilm();
+          }
         }
       )
+  }
+
+  setCurrentFilm() {
+    this.currentFilm = this.films[this.id - 1];
   }
 
 }

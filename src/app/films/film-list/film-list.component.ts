@@ -18,7 +18,6 @@ export class FilmListComponent implements OnInit {
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
     this.swapi$.subscribe((data) => {
-      console.log(data);
       this.films = data.films.items;
     });
   }
