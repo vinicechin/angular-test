@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { SwapiState } from '../../store/swapi.state';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-film-item',
@@ -15,9 +16,11 @@ export class FilmItemComponent implements OnInit {
   films: any[];
   id: number;
   currentFilm: any;
+  charNamesList: any[];
 
   constructor(private route: ActivatedRoute,
-              private store: Store<SwapiState>) { }
+              private store: Store<SwapiState>,
+              private dataService: DataService) { }
 
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
@@ -33,15 +36,16 @@ export class FilmItemComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
-          if (this.films) {
-            this.setCurrentFilm();
-          }
+          this.setCurrentFilm();
         }
       )
   }
 
   setCurrentFilm() {
     this.currentFilm = this.films[this.id - 1];
+
+    this.charNamesList = [];
+    this.dataService.getFilmsTitle(this.films.length, this.charNamesList)
   }
 
 }
