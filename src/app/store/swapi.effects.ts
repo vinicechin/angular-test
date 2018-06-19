@@ -39,6 +39,9 @@ export class SwapiEffects {
       return this.getDataRecursively('https://swapi.co/api/people');
     })
     .map((data: any) => {
+      for(let char of data) {
+        char.id = this.getIdFromUrl(char.url)
+      }
       console.log(data)
       return new swapiActions.GetCharsSuccessAction({chars: data})
     })
@@ -68,5 +71,9 @@ export class SwapiEffects {
           }
         )
     });
+  }
+
+  getIdFromUrl(url) {
+    return parseInt(url.substr(url.length - 3, 2).replace('/',''))
   }
 }

@@ -23,14 +23,15 @@ export class DataService {
     }
   }
 
-  //In: return array, movie characters array
+  //Receive a characters array and returns an array with their names
   getCharsName(charsArray: any[], array: any[]) {
-    // const idsArray = this.getIdsArray(charsArray);
     if (this.chars.length > 0) {
       for(let id of this.getIdsArray(charsArray)) {
-        array.push(this.chars[id - 1].name);
+        const character = this.chars.find((char) => {
+          return char.id === id
+        });
+        array.push(character.name);
       }
-      console.log(array);
     }
   }
 
