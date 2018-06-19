@@ -3,21 +3,29 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
+  films: any[] = [];
+  chars: any[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getFilmsTitle(length: number, array: any[]) {
-    for(let i = 1; i <= length; i++) {
-      this.getUnitaryData("https://swapi.co/api/films/" + i).subscribe(
-        (film: any) => {
-          array.push(film.title);
-        }
-      )
+  getFilms() {
+    return this.films;
+  }
+
+  setData(data: any) {
+    this.films = data.films.items;
+    this.chars = data.chars.items;
+  }
+
+  getFilmsTitle(array: any[]) {
+    for(let film of this.films) {
+      array.push(film.title);
     }
   }
 
-  getUnitaryData(url: string) {
-    return this.http.get(url)
+  //In: return array, movie characters array
+  getCharsName(charsArray: any[], array: any[]) {
+    console.log(charsArray);
   }
 
 }

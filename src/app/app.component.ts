@@ -22,9 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
     this.swapi$.subscribe((data) => {
-      // console.log(data);
-      // this.films = data.films.items; // needs to add "fimls: any[]" to variables to use this
-      // this.dataService.setFilms(data.films.items); // needs to import dataservice if using this
+      this.dataService.setData(data);
     });
 
     this.store.dispatch(new SwapiActions.GetFilmsAction())

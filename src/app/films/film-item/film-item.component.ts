@@ -12,8 +12,7 @@ import { DataService } from '../../data.service';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
-  swapi$: Observable<any>;
-  films: any[];
+  swapi$: Observable<SwapiState>;
   id: number;
   currentFilm: any;
   charNamesList: any[];
@@ -26,8 +25,6 @@ export class FilmItemComponent implements OnInit {
     this.swapi$ = this.store.select('swapi');
 
     this.swapi$.subscribe((data) => {
-      this.films = data.films.items;
-      // console.log(data.chars.items);
       if (!this.currentFilm) {
         this.setCurrentFilm();
       }
@@ -43,10 +40,13 @@ export class FilmItemComponent implements OnInit {
   }
 
   setCurrentFilm() {
-    this.currentFilm = this.films[this.id - 1];
-
-    this.charNamesList = [];
-    this.dataService.getFilmsTitle(this.films.length, this.charNamesList)
+    this.currentFilm = this.dataService.getFilms()[this.id - 1];
+    if (this.currentFilm) {
+      console.log(this.currentFilm)
+      this.charNamesList = [];
+      // this.dataService.getFilmsTitle(this.charNamesList)
+      this.dataService.getCharsName(this.currentFilm.characters, this.charNamesList)
+    }
   }
 
 }
