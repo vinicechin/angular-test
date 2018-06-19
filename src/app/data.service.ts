@@ -25,7 +25,22 @@ export class DataService {
 
   //In: return array, movie characters array
   getCharsName(charsArray: any[], array: any[]) {
-    console.log(charsArray);
+    // const idsArray = this.getIdsArray(charsArray);
+    if (this.chars.length > 0) {
+      for(let id of this.getIdsArray(charsArray)) {
+        array.push(this.chars[id - 1].name);
+      }
+      console.log(array);
+    }
+  }
+
+  getIdsArray(originArray) { 
+    const resultArray = [] 
+    for (let item of originArray) { 
+      const itemId = parseInt(item.substr(item.length - 3, 2).replace('/','')) 
+      resultArray.push(itemId) 
+    } 
+    return resultArray; 
   }
 
 }

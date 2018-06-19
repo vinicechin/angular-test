@@ -25,7 +25,7 @@ export class FilmItemComponent implements OnInit {
     this.swapi$ = this.store.select('swapi');
 
     this.swapi$.subscribe((data) => {
-      if (!this.currentFilm) {
+      if (!this.currentFilm || this.charNamesList.length <= 0) {
         this.setCurrentFilm();
       }
     });
@@ -44,7 +44,6 @@ export class FilmItemComponent implements OnInit {
     if (this.currentFilm) {
       console.log(this.currentFilm)
       this.charNamesList = [];
-      // this.dataService.getFilmsTitle(this.charNamesList)
       this.dataService.getCharsName(this.currentFilm.characters, this.charNamesList)
     }
   }
