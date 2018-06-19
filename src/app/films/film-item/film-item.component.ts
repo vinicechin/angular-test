@@ -25,7 +25,7 @@ export class FilmItemComponent implements OnInit {
     this.swapi$ = this.store.select('swapi');
 
     this.swapi$.subscribe((data) => {
-      if (!this.currentFilm || this.filmCharacters.length <= 0) {
+      if (this.verifyDataLoad()) {
         this.setCurrentFilm();
       }
     });
@@ -37,6 +37,10 @@ export class FilmItemComponent implements OnInit {
           this.setCurrentFilm();
         }
       )
+  }
+
+  verifyDataLoad() {
+    return !this.currentFilm || this.filmCharacters.length <= 0;
   }
 
   setCurrentFilm() {
