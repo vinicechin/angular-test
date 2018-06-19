@@ -5,17 +5,18 @@ import { initialState } from './swapi.state';
 export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActions ) {
   switch (action.type) {
     case fromSwapi.GET_FILMS: {
+      const films = state.films;
+      films.loading = true;
       return {
         ...state,
-        loading: true
+        films: films
       };
     };
 
     case fromSwapi.GET_FILMS_SUCCESS: {
       return {
         ...state,
-        film_list: action.payload.films,
-        loading: false,
+        films: {items: action.payload.films, loading: false},
         error: null
       };
     };
@@ -23,8 +24,7 @@ export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActio
     case fromSwapi.GET_FILMS_ERROR: {
       return {
         ...state,
-        film_list: [],
-        loading: false,
+        films: {items: [], loading: false},
         error: action.payload.error
       };
     };

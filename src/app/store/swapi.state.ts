@@ -1,13 +1,25 @@
 import { Action } from '@ngrx/store';
 
 export interface SwapiState {
-  film_list: any[];
-  loading: boolean;
+  films: {
+    items: any[],
+    loading: boolean
+  };
+  chars: {
+    items: any[],
+    loading: boolean
+  };
   error: any;
 }
 
 export const initialState: SwapiState = {
-  film_list: [],
-  loading: false,
+  films: {
+    items: [],
+    loading: false
+  },
+  chars: {
+    items: [],
+    loading: false
+  },
   error: null
 };
