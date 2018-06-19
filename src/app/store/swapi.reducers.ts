@@ -4,6 +4,8 @@ import { initialState } from './swapi.state';
 
 export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActions ) {
   switch (action.type) {
+    
+    // FILMS CASES
     case fromSwapi.GET_FILMS: {
       const films = state.films;
       films.loading = true;
@@ -29,6 +31,7 @@ export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActio
       };
     };
 
+    // CHARACTERS CASES
     case fromSwapi.GET_CHARS: {
       const chars = state.chars;
       chars.loading = true;
@@ -54,6 +57,7 @@ export function SwapiReducer( state = initialState, action: fromSwapi.SwapiActio
       };
     };
 
+    // DEFAULT CASE
     default:
       return state;
   }

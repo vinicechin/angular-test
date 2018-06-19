@@ -16,6 +16,7 @@ export class SwapiEffects {
   constructor(private http: HttpClient,
               private action$: Actions) {}
 
+  // EFFECTS
   @Effect()
   getFilms$ = this.action$
     .ofType(swapiActions.GET_FILMS)
@@ -51,6 +52,7 @@ export class SwapiEffects {
       );
     })
 
+  // AUXILIAR METHODS
   getDataRecursively(url = 'https://swapi.co/api/people', array = []) {
     return new Promise((resolve, reject) => {
       this.http.get(url)
