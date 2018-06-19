@@ -27,6 +27,7 @@ export class FilmItemComponent implements OnInit {
 
     this.swapi$.subscribe((data) => {
       this.films = data.films.items;
+      // console.log(data.chars.items);
       if (!this.currentFilm) {
         this.setCurrentFilm();
       }

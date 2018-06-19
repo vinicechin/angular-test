@@ -20,11 +20,11 @@ export class SwapiEffects {
   getFilms$ = this.action$
     .ofType(swapiActions.GET_FILMS)
     .switchMap(() => {
-      return this.http.get('https://swapi.co/api/films')
+      return this.getDataRecursively('https://swapi.co/api/films');
     })
     .map((data: any) => {
-      console.log(data.results)
-      return new swapiActions.GetFilmsSuccessAction({films: data.results})
+      console.log(data)
+      return new swapiActions.GetFilmsSuccessAction({films: data})
     })
     .catch((error) => {
       return Observable.of(
@@ -36,8 +36,7 @@ export class SwapiEffects {
   getChars$ = this.action$
     .ofType(swapiActions.GET_CHARS)
     .switchMap(() => {
-      // return this.http.get('https://swapi.co/api/people')
-      return this.getDataRecursively();
+      return this.getDataRecursively('https://swapi.co/api/people');
     })
     .map((data: any) => {
       console.log(data)
@@ -55,8 +54,8 @@ export class SwapiEffects {
         .toPromise()
         .then(
           (data: any) => {
+            console.log("loaded: " + url);
             array = array.concat(data.results);
-            console.log(array);
 
             if(data.next) {
               this.getDataRecursively(data.next, array).then(resolve).catch(reject)
@@ -69,17 +68,5 @@ export class SwapiEffects {
           }
         )
     });
-
-      // .toPromise()
-      // .map((data: any) => {
-      //   console.log(data)
-      //   Object.assign(array, data.results);
-      //   console.log(array)
-      //   if (!data.next) {
-      //     resolve(array)
-      //   } else {
-      //     this.getDataRecursively(data.next, array).then(resolve).catch(reject);
-      //   }
-      // }))
   }
 }
