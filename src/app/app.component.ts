@@ -13,6 +13,7 @@ import { DataService } from './data.service';
   providers: [DataService]
 })
 export class AppComponent implements OnInit {
+  isCollapsed = true;
   title = 'app';
   swapi$: Observable<any>;
 

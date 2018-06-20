@@ -44,7 +44,7 @@ export class FilmItemComponent implements OnInit {
   }
 
   setCurrentFilm() {
-    this.currentFilm = this.dataService.getFilms()[this.id - 1];
+    this.currentFilm = this.dataService.getFilmById(this.id);
     if (this.currentFilm) {
       console.log(this.currentFilm)
       this.filmCharacters = [];
