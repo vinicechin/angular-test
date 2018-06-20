@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule} from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { FilmsComponent } from './films/films.component';
@@ -31,7 +32,8 @@ import { CharacterListComponent } from './characters/character-list/character-li
     AppRoutingModule,
     StoreModule.forRoot(({ swapi: SwapiReducer})),
     EffectsModule.forRoot([ SwapiEffects ]),
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
