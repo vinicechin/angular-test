@@ -12,11 +12,10 @@ import { DataService } from '../../data.service';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
-  swapi$: Observable<any>;
-  films: any[];
+  swapi$: Observable<SwapiState>;
   id: number;
   currentFilm: any;
-  charNamesList: any[];
+  filmCharacters: any[];
 
   constructor(private route: ActivatedRoute,
               private store: Store<SwapiState>,
@@ -26,8 +25,7 @@ export class FilmItemComponent implements OnInit {
     this.swapi$ = this.store.select('swapi');
 
     this.swapi$.subscribe((data) => {
-      this.films = data.films.items;
-      if (!this.currentFilm) {
+      if (this.verifyDataLoad()) {
         this.setCurrentFilm();
       }
     });
@@ -41,11 +39,17 @@ export class FilmItemComponent implements OnInit {
       )
   }
 
-  setCurrentFilm() {
-    this.currentFilm = this.films[this.id - 1];
+  verifyDataLoad() {
+    return !this.currentFilm || this.filmCharacters.length <= 0;
+  }
 
-    this.charNamesList = [];
-    this.dataService.getFilmsTitle(this.films.length, this.charNamesList)
+  setCurrentFilm() {
+    this.currentFilm = this.dataService.getFilms()[this.id - 1];
+    if (this.currentFilm) {
+      console.log(this.currentFilm)
+      this.filmCharacters = [];
+      this.dataService.getCharactersFromUrls(this.currentFilm.characters, this.filmCharacters)
+    }
   }
 
 }

@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { FilmsComponent } from './films/films.component';
 import { FilmItemComponent } from './films/film-item/film-item.component';
 import { FilmListComponent } from './films/film-list/film-list.component';
+import { CharactersComponent } from './characters/characters.component';
+import { CharacterItemComponent } from './characters/character-item/character-item.component';
+import { CharacterListComponent } from './characters/character-list/character-list.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/films', pathMatch: 'full' },
@@ -11,6 +14,10 @@ const appRoutes: Routes = [
     { path: '', component: FilmListComponent },
     { path: ':id', component: FilmItemComponent }
   ]},
+  { path: 'characters', component: CharactersComponent, children: [
+    { path: '', component: CharacterListComponent },
+    { path: ':id', component: CharacterItemComponent }
+  ]}
 ]
 
 @NgModule({

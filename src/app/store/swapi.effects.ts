@@ -16,20 +16,66 @@ export class SwapiEffects {
   constructor(private http: HttpClient,
               private action$: Actions) {}
 
+  // EFFECTS
   @Effect()
   getFilms$ = this.action$
     .ofType(swapiActions.GET_FILMS)
     .switchMap(() => {
-      return this.http.get('https://swapi.co/api/films')
+      return this.getDataRecursively('https://swapi.co/api/films');
     })
     .map((data: any) => {
-      console.log(data.results)
-      return new swapiActions.GetFilmsSuccessAction({films: data.results})
+      console.log(data)
+      return new swapiActions.GetFilmsSuccessAction({films: data})
     })
     .catch((error) => {
       return Observable.of(
-        // new Act.GetTodoFailed({ error: error })
         new swapiActions.GetFilmsErrorAction({error: error})
       );
     })
+
+  @Effect()
+  getChars$ = this.action$
+    .ofType(swapiActions.GET_CHARS)
+    .switchMap(() => {
+      return this.getDataRecursively('https://swapi.co/api/people');
+    })
+    .map((data: any) => {
+      for(let char of data) {
+        char.id = this.getIdFromUrl(char.url)
+      }
+      console.log(data)
+      return new swapiActions.GetCharsSuccessAction({chars: data})
+    })
+    .catch((error) => {
+      return Observable.of(
+        new swapiActions.GetCharsErrorAction({error: error})
+      );
+    })
+
+  // AUXILIAR METHODS
+  getDataRecursively(url = 'https://swapi.co/api/people', array = []) {
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .toPromise()
+        .then(
+          (data: any) => {
+            console.log("loaded: " + url);
+            array = array.concat(data.results);
+
+            if(data.next) {
+              this.getDataRecursively(data.next, array).then(resolve).catch(reject)
+            } else {
+              resolve(array);
+            }
+          },
+          error => {
+            reject(error);
+          }
+        )
+    });
+  }
+
+  getIdFromUrl(url) {
+    return parseInt(url.substr(url.length - 3, 2).replace('/',''))
+  }
 }
