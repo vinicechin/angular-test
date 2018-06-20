@@ -12,13 +12,19 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SwapiReducer } from './store/swapi.reducers';
 import { SwapiEffects } from './store/swapi.effects';
+import { CharactersComponent } from './characters/characters.component';
+import { CharacterItemComponent } from './characters/character-item/character-item.component';
+import { CharacterListComponent } from './characters/character-list/character-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilmsComponent,
     FilmListComponent,
-    FilmItemComponent
+    FilmItemComponent,
+    CharactersComponent,
+    CharacterItemComponent,
+    CharacterListComponent
   ],
   imports: [
     BrowserModule,
