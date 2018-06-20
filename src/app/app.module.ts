@@ -17,7 +17,7 @@ import { SwapiEffects } from './store/swapi.effects';
 import { CharactersComponent } from './characters/characters.component';
 import { CharacterItemComponent } from './characters/character-item/character-item.component';
 import { CharacterListComponent } from './characters/character-list/character-list.component';
-import { FilterPipe } from './app.pipes';
+import { FilterPipe, SortByPipe } from './app.pipes';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { FilterPipe } from './app.pipes';
     CharactersComponent,
     CharacterItemComponent,
     CharacterListComponent,
-    FilterPipe
+    FilterPipe,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
