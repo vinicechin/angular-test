@@ -17,6 +17,12 @@ export class DataService {
     return this.films;
   }
 
+  getFilmById(id) {
+    return this.films.find((film) => {
+      return film.episode_id === id;
+    });
+  }
+
   setData(data: any) {
     this.films = data.films.items;
     this.chars = data.chars.items;
