@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { SwapiState } from '../../store/swapi.state';
 
 @Component({
   selector: 'app-character-list',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./character-list.component.css']
 })
 export class CharacterListComponent implements OnInit {
+  swapi$: Observable<any>;
+  characters: any[];
+  searchTerm = '';
 
-  constructor() { }
+  constructor(private store: Store<SwapiState>) { }
 
   ngOnInit() {
+    this.swapi$ = this.store.select('swapi');
+    this.swapi$.subscribe((data) => {
+      this.characters = data.chars.items;
+    });
   }
 
 }
