@@ -12,6 +12,7 @@ import { SwapiState } from '../../store/swapi.state';
 export class FilmListComponent implements OnInit {
   swapi$: Observable<any>;
   films: any[];
+  searchTerm = '';
 
   constructor(private store: Store<SwapiState>) { }
 

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { StoreModule} from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FilmsComponent } from './films/films.component';
@@ -15,6 +17,7 @@ import { SwapiEffects } from './store/swapi.effects';
 import { CharactersComponent } from './characters/characters.component';
 import { CharacterItemComponent } from './characters/character-item/character-item.component';
 import { CharacterListComponent } from './characters/character-list/character-list.component';
+import { FilterPipe, SortByPipe } from './app.pipes';
 
 @NgModule({
   declarations: [
@@ -24,14 +27,18 @@ import { CharacterListComponent } from './characters/character-list/character-li
     FilmItemComponent,
     CharactersComponent,
     CharacterItemComponent,
-    CharacterListComponent
+    CharacterListComponent,
+    FilterPipe,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     StoreModule.forRoot(({ swapi: SwapiReducer})),
     EffectsModule.forRoot([ SwapiEffects ]),
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
