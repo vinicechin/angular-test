@@ -19,6 +19,6 @@
 <p>
   film-item id={{ id }} title={{ currentFilm ? currentFilm.title : '' }} works!
 </p>
-<div *ngFor="let character of filmCharacters">
+<div *ngFor="let character of filmCharacters | sortBy: 'name'">
   {{ character.name }}
 </div>
