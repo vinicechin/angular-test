@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   isCollapsed = true;
   title = 'app';
   swapi$: Observable<any>;
+  loading: boolean = true;
 
   constructor(private store: Store<SwapiState>,
               private dataService: DataService) {}
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
     this.swapi$.subscribe((data) => {
-      this.dataService.setData(data);
+      this.loading = this.dataService.setData(data);
     });
 
     this.store.dispatch(new SwapiActions.GetFilmsAction())

@@ -44,7 +44,10 @@ export class DataService {
 
     // implements verification if waiting for all data being loaded
     if (this.films.length > 0) {
-      this.router.navigate(['/films']);
+      // this.router.navigate(['/films']);
+      return false;
+    } else {
+      return true;
     }
   }
 

@@ -18,6 +18,7 @@ import { CharactersComponent } from './characters/characters.component';
 import { CharacterItemComponent } from './characters/character-item/character-item.component';
 import { CharacterListComponent } from './characters/character-list/character-list.component';
 import { FilterPipe, SortByPipe } from './app.pipes';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FilterPipe, SortByPipe } from './app.pipes';
     CharacterItemComponent,
     CharacterListComponent,
     FilterPipe,
-    SortByPipe
+    SortByPipe,
+    LoadingScreenComponent
   ],
   imports: [
     BrowserModule,
