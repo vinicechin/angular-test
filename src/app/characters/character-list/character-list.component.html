@@ -1,5 +1,7 @@
 <div class="row my-2">
-  <input [(ngModel)]="searchTerm" class="form-control mr-sm-2 col-12" type="text" placeholder="Filter" aria-label="Filter">
+  <div class="col-12">
+    <input [(ngModel)]="searchTerm" class="form-control mr-sm-2" type="text" placeholder="Filter by name" aria-label="Filter">
+  </div>
 </div>
 <div class="row">
   <div *ngFor="let character of characters | filter : searchTerm | sortBy: 'name'" class="col-md-4">

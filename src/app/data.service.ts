@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { Router } from '@angular/router'; 
 
 enum Type {
     FILMS = 0,
@@ -11,14 +12,21 @@ export class DataService {
   films: any[] = [];
   chars: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
+  //Receive an id and returns a film object
   getFilmById(id) {
     return this.films.find((film) => {
       return film.episode_id === id;
     });
   }
 
+  //Receive a films url array and returns a films array
+  getFilmsFromUrls(filmsArray: any[], array: any[]) {
+    this.getArrayFromUrls(filmsArray, array, Type.FILMS);
+  }
+
+  //Receive an id and returns a character object
   getCharacterById(id) {
     return this.chars.find((character) => {
       return character.id === id;
@@ -30,14 +38,17 @@ export class DataService {
     this.getArrayFromUrls(charsArray, array, Type.CHARACTERS);
   }
 
-  //Receive a films url array and returns a films array
-  getFilmsFromUrls(filmsArray: any[], array: any[]) {
-    this.getArrayFromUrls(filmsArray, array, Type.FILMS);
-  }
-
   setData(data: any) {
     this.films = data.films.items;
     this.chars = data.chars.items;
+
+    // implements verification if waiting for all data being loaded
+    if (this.films.length > 0) {
+      // this.router.navigate(['/films']);
+      return false;
+    } else {
+      return true;
+    }
   }
 
   getArrayFromUrls(urlArray: any[], array: any[], type: Type) {

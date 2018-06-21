@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand">Star Wars Wiki</a>
+  <a class="navbar-brand" (click)="router.navigate(['']);" style="cursor: pointer">SW Wiki</a>
   <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -22,8 +22,12 @@
         <a class="nav-link" routerLink="/characters/1">Char 1</a>
       </li>
     </ul>
+    <div class="loader" *ngIf="loading"></div>
   </div>
 </nav>
+<div *ngIf="error" style="background-color: red; text-align: center; color: white; height: 15px; font-size: 12px; padding: 0px; line-height: 12px">
+  {{ error.message }}
+</div>
 
 <main role="main">
   <div class="container">
