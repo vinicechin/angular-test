@@ -15,7 +15,7 @@ export class FilmItemComponent implements OnInit {
   swapi$: Observable<SwapiState>;
   id: number;
   currentFilm: any;
-  filmCharacters: any[];
+  filmCharacters: any[] = [];
 
   constructor(private route: ActivatedRoute,
               private store: Store<SwapiState>,
