@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router'; 
 
 import { SwapiState } from './store/swapi.state';
 import * as SwapiActions from './store/swapi.actions';
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   loading: boolean = true;
 
   constructor(private store: Store<SwapiState>,
-              private dataService: DataService) {}
+              private dataService: DataService,
+              private router: Router) {}
 
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
