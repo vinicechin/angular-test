@@ -22,7 +22,6 @@ export class FilterPipe implements PipeTransform {
 })
 export class SortByPipe implements PipeTransform {
   transform(items: any[], sortedBy: string): any {
-    console.log('sortedBy', sortedBy);
     return items.sort((a,b) => {
       if (a[sortedBy] < b[sortedBy])
         return -1;
