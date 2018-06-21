@@ -13,24 +13,31 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getFilms() {
-    return this.films;
-  }
-
   getFilmById(id) {
     return this.films.find((film) => {
       return film.episode_id === id;
     });
   }
 
-  setData(data: any) {
-    this.films = data.films.items;
-    this.chars = data.chars.items;
+  getCharacterById(id) {
+    return this.chars.find((character) => {
+      return character.id === id;
+    });
   }
 
   //Receive a characters url array and returns a characters array
   getCharactersFromUrls(charsArray: any[], array: any[]) {
     this.getArrayFromUrls(charsArray, array, Type.CHARACTERS);
+  }
+
+  //Receive a films url array and returns a films array
+  getFilmsFromUrls(filmsArray: any[], array: any[]) {
+    this.getArrayFromUrls(filmsArray, array, Type.FILMS);
+  }
+
+  setData(data: any) {
+    this.films = data.films.items;
+    this.chars = data.chars.items;
   }
 
   getArrayFromUrls(urlArray: any[], array: any[], type: Type) {
@@ -50,9 +57,10 @@ export class DataService {
       for (let id of this.getIdsArray(urlArray)) {
         const item = dataArray.find((item) => {
           if (type === Type.FILMS) {
-            return item.episode_id;
+            return item.episode_id === id;
+          } else {
+            return item.id === id;
           }
-          return item.id === id;
         });
         array.push(item);
       }
