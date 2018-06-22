@@ -4,13 +4,23 @@
 
 .film-content {
   background-color: grey;
-  padding: 5px;
+  padding: 5px 10px 10px 10px;
   border: 1px solid #FFC500;
   border-radius: 5px;
   color: white;
 }
 
-.film-content h2 {
+.film-title {
   text-align: center;
   color: #FFC500;
+}
+
+.film-resume-details {
+  text-align: justify;
+  padding: 5px;
+}
+
+.details-btn-container {
+  display: flex;
+  justify-content: flex-end;
 }
