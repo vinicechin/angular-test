@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="row">
-  <div *ngFor="let film of films | filter : searchTerm | sortBy: 'episode_id'" class="col-md-4 film-container">
+  <div *ngFor="let film of films | filter : searchTerm | sortBy: 'episode_id'" class="col-lg-6 col-xl-4 film-container">
     <div class="film-content bg-dark">
       <h2 class="film-title">{{ film.title }}</h2>
       <div class="film-resume-details">
