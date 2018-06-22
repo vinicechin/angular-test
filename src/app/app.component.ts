@@ -27,15 +27,27 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
     this.swapi$.subscribe((data) => {
-      this.loading = this.dataService.setData(data);
+      const loadEnded = this.dataService.setData(data);
+      if (this.loading && loadEnded) {
+        this.loading = false;
+      }
 
       if (data.error) {
         this.error = data.error;
         data.error = null;
-        console.log(this.error);
+        console.log(this.error.message);
       }
     });
 
+    this.loadData();
+  }
+
+  reload() {
+    this.loading = true;
+    this.loadData();
+  }
+
+  loadData() {
     this.store.dispatch(new SwapiActions.GetFilmsAction())
     this.store.dispatch(new SwapiActions.GetCharsAction())
   }
