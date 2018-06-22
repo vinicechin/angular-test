@@ -1,0 +1,16 @@
+.film-container {
+  padding: 5px;
+}
+
+.film-content {
+  background-color: grey;
+  padding: 5px;
+  border: 1px solid #FFC500;
+  border-radius: 5px;
+  color: white;
+}
+
+.film-content h2 {
+  text-align: center;
+  color: #FFC500;
+}

@@ -4,9 +4,11 @@
   </div>
 </div>
 <div class="row">
-  <div *ngFor="let film of films | filter : searchTerm | sortBy: 'episode_id'" class="col-md-4">
-    <h2>{{ film.title }}</h2>
-    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+  <div *ngFor="let film of films | filter : searchTerm | sortBy: 'episode_id'" class="col-md-4 film-container">
+    <div class="film-content bg-dark">
+      <h2>{{ film.title }}</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      <a class="btn btn-secondary" role="button">View details »</a>
+    </div>
   </div>
 </div>
