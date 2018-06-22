@@ -1,8 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   overflow-y: scroll;
-  background: url('/assets/stars-background.png');
+  background: url('/assets/images/stars-background.png');
   background-size: cover;
   background-attachment: fixed;
   background-repeat: repeat;
+}
+
+/* App icons */
+.films-icon {
+  background: url('/assets/images/icons/Artboard@3x.png');
+  background-size: cover;
+  width: 19px;
+  height: 19px;
+  margin: 2px 4px 0px 0px;
+}
+
+.characters-icon {
+  background: url('/assets/images/icons/people.png');
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  margin: 4px 4px 0px 0px;
 }
