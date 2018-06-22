@@ -8,7 +8,7 @@
     <div class="film-content bg-dark">
       <h2 class="film-title">{{ film.title }}</h2>
       <div class="film-resume-details">
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p>{{ film.opening_crawl }}</p>
       </div>
       <div class="details-btn-container">
         <a class="btn btn-secondary" role="button" (click)="router.navigate(['films', film.episode_id]);">View details »</a>
