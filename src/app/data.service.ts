@@ -42,12 +42,14 @@ export class DataService {
     this.films = data.films.items;
     this.chars = data.chars.items;
 
-    // implements verification if waiting for all data being loaded
-    if (!data.films.loading && !data.chars.loading) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.verifyDataLoaded(data);
+  }
+
+  verifyDataLoaded(data) {
+    const filmsLoading = data.films.loading
+    const charsLoading = data.chars.loading
+
+    return !filmsLoading && !charsLoading;
   }
 
   getArrayFromUrls(urlArray: any[], array: any[], type: Type) {
