@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   swapi$: Observable<any>;
   loading: boolean = true;
-  error: any = null;
+  error: boolean = false;
 
   constructor(private store: Store<SwapiState>,
               private dataService: DataService,
@@ -33,9 +33,9 @@ export class AppComponent implements OnInit {
       }
 
       if (data.error) {
-        this.error = data.error;
+        this.error = true;
+        console.log(data.error.message);
         data.error = null;
-        console.log(this.error.message);
       }
     });
 
@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
 
   reload() {
     this.loading = true;
+    this.error = false;
     this.loadData();
   }
 
