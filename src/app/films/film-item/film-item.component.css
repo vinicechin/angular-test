@@ -30,12 +30,17 @@ h2, h4 {
   border-radius: 5px;
 }
 
-.character-item {
+.list-item {
   width: 50%;
   float: left;
   white-space: nowrap;
   overflow:hidden !important;
   text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  color: #FFC500;
 }
 
 .lists-container {
