@@ -21,35 +21,31 @@ export class SwapiEffects {
   getFilms$ = this.action$
     .ofType(swapiActions.GET_FILMS)
     .switchMap(() => {
-      return this.getDataRecursively('https://swapi.co/api/films');
-    })
-    .map((data: any) => {
-      console.log(data)
-      return new swapiActions.GetFilmsSuccessAction({films: data})
-    })
-    .catch((error) => {
-      return Observable.of(
-        new swapiActions.GetFilmsErrorAction({error: error})
-      );
+      return this.getDataRecursively('https://swapi.co/api/films')
+        .then((data: any) => {
+          console.log(data)
+          return new swapiActions.GetFilmsSuccessAction({films: data})
+        })
+        .catch((error) => {
+          return new swapiActions.GetFilmsErrorAction({error: error})
+        });
     })
 
   @Effect()
   getChars$ = this.action$
     .ofType(swapiActions.GET_CHARS)
     .switchMap(() => {
-      return this.getDataRecursively('https://swapi.co/api/people');
-    })
-    .map((data: any) => {
-      for(let char of data) {
-        char.id = this.getIdFromUrl(char.url)
-      }
-      console.log(data)
-      return new swapiActions.GetCharsSuccessAction({chars: data})
-    })
-    .catch((error) => {
-      return Observable.of(
-        new swapiActions.GetCharsErrorAction({error: error})
-      );
+      return this.getDataRecursively('https://swapi.co/api/people')
+        .then((data: any) => {
+          for(let char of data) {
+            char.id = this.getIdFromUrl(char.url)
+          }
+          console.log(data)
+          return new swapiActions.GetCharsSuccessAction({chars: data})
+        })
+        .catch((error) => {
+            new swapiActions.GetCharsErrorAction({error: error})
+        });
     })
 
   // AUXILIAR METHODS

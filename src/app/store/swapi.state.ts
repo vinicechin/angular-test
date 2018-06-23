@@ -15,11 +15,11 @@ export interface SwapiState {
 export const initialState: SwapiState = {
   films: {
     items: [],
-    loading: false
+    loading: true
   },
   chars: {
     items: [],
-    loading: false
+    loading: true
   },
   error: null
 };

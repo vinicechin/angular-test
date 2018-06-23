@@ -26,7 +26,7 @@
   </div>
 </nav>
 <div *ngIf="error" style="background-color: red; text-align: center; color: white; height: 15px; font-size: 12px; padding: 0px; line-height: 12px">
-  {{ error.message }}
+  Error loading the API data. <a (click)="reload()" style="cursor: pointer; text-decoration: underline;">Try to reload</a>
 </div>
 
 <main role="main">

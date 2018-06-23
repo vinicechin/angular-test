@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   swapi$: Observable<any>;
   loading: boolean = true;
-  error: any = null;
+  error: boolean = false;
 
   constructor(private store: Store<SwapiState>,
               private dataService: DataService,
@@ -27,15 +27,28 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.swapi$ = this.store.select('swapi');
     this.swapi$.subscribe((data) => {
-      this.loading = this.dataService.setData(data);
+      const loadEnded = this.dataService.setData(data);
+      if (this.loading && loadEnded) {
+        this.loading = false;
+      }
 
       if (data.error) {
-        this.error = data.error;
+        this.error = true;
+        console.log(data.error.message);
         data.error = null;
-        console.log(this.error);
       }
     });
 
+    this.loadData();
+  }
+
+  reload() {
+    this.loading = true;
+    this.error = false;
+    this.loadData();
+  }
+
+  loadData() {
     this.store.dispatch(new SwapiActions.GetFilmsAction())
     this.store.dispatch(new SwapiActions.GetCharsAction())
   }
