@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" (click)="router.navigate(['']);" style="cursor: pointer; color: #FFC500">SW Wiki</a>
+  <a class="navbar-brand" (click)="router.navigate(['']);">SW Wiki</a>
   <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -25,7 +25,7 @@
     <div class="loader" *ngIf="loading"></div>
   </div>
 </nav>
-<div *ngIf="error" style="background-color: red; text-align: center; color: white; height: 15px; font-size: 12px; padding: 0px; line-height: 12px">
+<div *ngIf="error" class="error-container">
   Error loading the API data. <a (click)="reload()" style="cursor: pointer; text-decoration: underline;">Try to reload</a>
 </div>
 
